@@ -9,7 +9,7 @@ describe('Pact Verification', () => {
     const opts = {
       provider: "server",
       logLevel: "ERROR",
-      providerBaseUrl: "http://localhost:5555",
+      providerBaseUrl: "https://localhost:5555",
       stateHandlers: {
         "There is a car registered": () => {
           return Promise.resolve(`Cars registered to the db`);

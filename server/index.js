@@ -1,5 +1,5 @@
 var express = require('express');
-var http2 = require('http2');
+var spdy = require('spdy');
 var fs = require('fs');
 var app = express();
 
@@ -26,9 +26,12 @@ app.get('/cars/:id', function (req, res) {
 });
 
 var port = 5555;
-http2.createServer({
-  key: fs.readFileSync('./cert/localhost.key'),
-  cert: fs.readFileSync('./cert/localhost.cert')
+spdy.createServer({
+  key: fs.readFileSync('./localhost.key'),
+  cert: fs.readFileSync('./localhost.cert'),
+  spdy: {
+	protocols: ['h2'],
+  }
 }, app).listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
